@@ -4,9 +4,9 @@ namespace DataProcessor;
 
 class Program
 {
-    static void Main(string[] args)
+    static async void Main(string[] args)
     {
-        var records = ProcessData();
+        var records = await ProcessData();
 
         Console.WriteLine($"Successfully processed {records.Count()} records");
         foreach (var person in records)
@@ -17,14 +17,14 @@ class Program
         Console.ReadLine();
     }
 
-    static IReadOnlyCollection<Person> ProcessData()
+    static async Task<IReadOnlyCollection<Person>> ProcessData()
     {
         var loader = new DataLoader();
         IReadOnlyCollection<string> data = loader.LoadData();
 
         var logger = new FileLogger();
         var parser = new DataParser(logger);
-        var records = parser.ParseData(data);
+        var records = await parser.ParseData(data);
         return records;
     }
 }

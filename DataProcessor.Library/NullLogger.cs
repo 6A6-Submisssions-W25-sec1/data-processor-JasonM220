@@ -2,7 +2,7 @@
 
 public class NullLogger : ILogger
 {
-    public void LogMessage(string message, string data)
+    public async Task LogMessage(string message, string data)
     {
         // does nothing
     }
